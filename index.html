@@ -1,229 +1,83 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox: История H1ki</title>
+    <title>Downloading Resource Pack...</title>
+    
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            cursor: url('https://wikimedia.org'), auto;
-            user-select: none;
+        /* Подключаем шрифт напрямую из вашего репозитория */
+        @font-face {
+            font-family: 'MinecraftCustom';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         body {
-            background: radial-gradient(circle, #2e8b57 0%, #1e4d2b 100%);
+            font-family: 'MinecraftCustom', monospace, sans-serif;
+            background-color: #121214; /* Глубокий темный фон */
+            color: #ffffff; /* Чистый белый текст */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
             overflow: hidden;
+            /* Отключаем размытие, чтобы пиксели были острыми */
+            image-rendering: pixelated;
         }
 
-        .roblox-menu {
-            background-color: #e1e1e1;
-            border: 4px solid #555555;
-            width: 450px;
-            padding: 20px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.4);
+        .message-container {
             text-align: center;
-            position: relative;
-        }
-
-        .menu-header {
-            background: linear-gradient(to bottom, #4a75a0, #285078);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            border: 2px solid #ffffff;
-            text-shadow: 1px 1px 0px #000;
-        }
-
-        .character-preview {
-            width: 180px;
-            height: 180px;
-            background-color: #fff;
-            border: 3px inset #888;
-            margin: 0 auto 25px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        .character-preview img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .roblox-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(to bottom, #aaaaaa 0%, #cccccc 15%, #777777 100%);
-            border: 3px solid;
-            border-color: #ffffff #555555 #555555 #ffffff;
-            color: #000000;
-            padding: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            box-shadow: inset 1px 1px 0px #fff;
-        }
-
-        .roblox-btn.play {
-            background: linear-gradient(to bottom, #00e000 0%, #00ff00 15%, #008000 100%);
-            color: white;
-            text-shadow: 1px 1px 1px #000;
-        }
-
-        .roblox-btn:active {
-            border-color: #555555 #ffffff #ffffff #555555;
-            padding: 13px 11px 11px 13px;
-        }
-
-        .menu-footer {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .story-box {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #e1e1e1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
             padding: 20px;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 10;
         }
 
-        .story-text {
-            text-align: left;
-            font-size: 1.05rem;
+        h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 0;
             line-height: 1.5;
-            color: #000;
-            background: white;
-            border: 2px inset #888;
-            padding: 15px;
-            height: 60%;
-            overflow-y: auto;
+            /* Фирменная жесткая тень из Minecraft */
+            text-shadow: 4px 4px 0px #3f3f3f; 
+            /* Дополнительное сглаживание для пиксельных шрифтов */
+            font-smooth: never;
+            -webkit-font-smoothing: none;
+        }
+
+        .message-container.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <div class="roblox-menu">
-        <div class="menu-header">H1ki (revil_box) Story</div>
-        
-        <!-- Прямая ссылка на официальный 3D-аватар твоего аккаунта без CORS-запросов -->
-        <div class="character-preview">
-            <img src="https://rbxcdn.com" alt="H1ki Avatar">
-        </div>
-
-        <button class="roblox-btn play" onclick="startGame()">Начать историю</button>
-        <button class="roblox-btn" onclick="alert('Главы откроются по ходу прохождения!')">Главы</button>
-        <button class="roblox-btn" onclick="alert('Из классики нет выхода!')">Выход</button>
-
-        <div class="menu-footer">© ROBLOX Corporation 2008-2026</div>
-
-        <!-- Окно истории -->
-        <div class="story-box" id="storyBox">
-            <div class="menu-header" id="chapterTitle">Глава 1: Появление</div>
-            <div class="story-text" id="storyContent">
-                Загрузка истории...
-            </div>
-            <button class="roblox-btn play" onclick="nextStep()" id="nextBtn">Далее</button>
+    <div class="box" id="content">
+        <div class="message-container" id="text-block">
+            <h1>Thank you for downloading my resource pack!</h1>
         </div>
     </div>
 
     <script>
-        // Массив с твоей историей
-        const storySteps = [
-            {
-                title: "Глава 1: Рождение легенды",
-                text: "Все началось несколько лет назад. В огромную вселенную Roblox зашел новый игрок с ником revil_box (H1ki). Вокруг был хаос: тысячи плейсов, миллионы скинов и тонны неизведанных миров. Тогда у него не было крутых вещей, только стандартный бекон-прическа или нуб-аватар..."
-            },
-            {
-                title: "Глава 2: Первые плейсы",
-                text: "H1ki начал свой путь с классических карт: симуляторы, тайкуны, паркуры (Obby). С каждым часом игры рос его опыт. Появлялись первые друзья в списке, первые победы в жестких мини-играх и первые накопленные робуксы."
-            },
-            {
-                title: "Глава 3: Стиль и признание",
-                text: "Со временем revil_box сформировал свой уникальный, узнаваемый стиль, который ты видишь сейчас на главном экране. Черные вещи, стильные аксессуары и банка колы в руке как символ уверенности. Теперь он не просто новичок, а опытный игрок со своей историей."
-            },
-            {
-                title: "Эпилог: Настоящее время",
-                text: "Сегодня H1ki продолжает свой путь, исследует новые режимы и даже создает собственный сайт! Приключение только начинается, и впереди еще много неизведанных серверов... Конец истории!"
-            }
-        ];
-
-        let currentStep = 0;
-
-        function startGame() {
-            playRetroSound(440, 0.1); 
-            document.getElementById('storyBox').style.display = 'flex';
-            showStep();
-        }
-
-        function showStep() {
-            document.getElementById('chapterTitle').innerText = storySteps[currentStep].title;
-            document.getElementById('storyContent').innerHTML = storySteps[currentStep].text;
+        window.onload = function() {
+            // 1. Автоматическое скачивание архива revil_pack.zip
+            const link = document.createElement('a');
+            link.href = 'revil_pack.zip';
+            link.download = 'revil_pack.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             
-            if (currentStep === storySteps.length - 1) {
-                document.getElementById('nextBtn').innerText = "В главное меню";
-            } else {
-                document.getElementById('nextBtn').innerText = "Далее";
-            }
-        }
-
-        function nextStep() {
-            playRetroSound(587, 0.05); 
-            if (currentStep === storySteps.length - 1) {
-                document.getElementById('storyBox').style.display = 'none';
-                currentStep = 0;
-            } else {
-                currentStep++;
-                showStep();
-            }
-        }
-
-        // Звуки без ошибок в консоли
-        function playRetroSound(frequency, duration) {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                
-                oscillator.type = 'square'; 
-                oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-                
-                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + duration);
-            } catch(e) {
-                console.log("Аудио заблокировано");
-            }
-        }
+            // 2. Через 1 секунду плавно показываем надпись
+            setTimeout(function() {
+                document.getElementById('text-block').classList.add('visible');
+                document.title = 'Thank You!';
+            }, 1000);
+        };
     </script>
-
 </body>
 </html>
