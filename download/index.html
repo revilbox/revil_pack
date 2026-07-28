@@ -55,39 +55,19 @@
             color: #ffff55; /* Желтеет при наведении */
         }
 
-        .scroll-button:hover .mc-pixel-arrow {
-            background-color: #ffff55; /* Стрелочка тоже становится золотой */
-        }
-
         .scroll-button p {
             font-size: 1.2rem;
-            margin: 0 0 20px 0;
+            margin: 0 0 10px 0;
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Оригинальная пиксельная стрелка Minecraft */
+        /* Настоящая толстая пиксельная стрелочка из самого шрифта Minecraft */
         .mc-pixel-arrow {
-            width: 32px;
-            height: 32px;
+            font-size: 2rem;
+            line-height: 1;
             margin: 0 auto;
-            background-color: #aaaaaa;
-            /* Рисуем стрелочку кубиками, имитируя текстуру */
-            clip-path: polygon(
-                37.5% 0%, 62.5% 0%, 
-                37.5% 50%, 62.5% 50%, 
-                12.5% 50%, 87.5% 50%, 
-                25% 62.5%, 75% 62.5%, 
-                37.5% 75%, 62.5% 75%, 
-                50% 87.5%, 50% 87.5%,
-                37.5% 50%, 62.5% 50%,
-                0% 50%, 100% 50%,
-                12.5% 62.5%, 87.5% 62.5%,
-                25% 75%, 75% 75%,
-                37.5% 87.5%, 62.5% 87.5%,
-                50% 100%
-            );
+            text-shadow: 3px 3px 0px #3f3f3f;
             animation: bounce 1.2s infinite ease-in-out;
-            transition: background-color 0.2s;
         }
 
         @keyframes bounce {
@@ -122,10 +102,10 @@
         .step .highlight-file { color: #ff55ff; white-space: nowrap; } 
         .step .highlight-options { color: #55ff55; white-space: nowrap; }
         
-        /* Пиксельный разделитель в тексте */
+        /* Пиксельный разделитель в тексте шага 3 (одна стрелочка) */
         .text-arrow {
-            color: #55ffff; /* Бирюзовый цвет для четкости */
-            margin: 0 10px;
+            color: #55ffff; 
+            margin: 0 12px;
             display: inline-block;
         }
 
@@ -148,10 +128,11 @@
     <div class="welcome-screen">
         <h1>Thank you for downloading my resource pack!</h1>
         
-        <!-- Кнопка скролла с плавной JS-функцией -->
+        <!-- Кнопка скролла -->
         <div class="scroll-button" onclick="smoothScrollToGuide()">
             <p>Installation guide below</p>
-            <div class="mc-pixel-arrow"></div>
+            <!-- Код оригинальной майнкрафтовской стрелки из шрифта -->
+            <div class="mc-pixel-arrow">&#9660;</div>
         </div>
     </div>
 
@@ -167,9 +148,9 @@
             <span class="num">2.</span> Open your Minecraft launcher (TLauncher, Legacy, Prism, or Official) and start the game.
         </div>
         
-        <!-- Заменили обычную стрелку на пиксельный текстовый указатель > > -->
+        <!-- Теперь тут строго одна майнкрафтовская стрелочка > -->
         <div class="step">
-            <span class="num">3.</span> In the main menu, go to <span class="highlight-options">Options</span> <span class="text-arrow">> ></span> <span class="highlight-options">Resource Packs</span>.
+            <span class="num">3.</span> In the main menu, go to <span class="highlight-options">Options</span> <span class="text-arrow">&gt;</span> <span class="highlight-options">Resource Packs</span>.
         </div>
         
         <div class="step">
@@ -192,20 +173,24 @@
     </div>
 
     <script>
-        // Функция 100% плавного скролла на чистом JS
         function smoothScrollToGuide() {
             const target = document.getElementById('guide');
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         window.onload = function() {
-            // Автоматическое скачивание
+            // 1. Автоматическое скачивание
             const link = document.createElement('a');
             link.href = 'revil_pack.zip';
             link.download = 'revil_pack.zip';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+
+            // 2. ИСПРАВЛЕНИЕ БАГА: Ровно через 1 секунду меняем заголовок вкладки на "Thank You!"
+            setTimeout(function() {
+                document.title = 'Thank You!';
+            }, 1000);
         };
     </script>
 </body>
