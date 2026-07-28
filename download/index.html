@@ -57,22 +57,25 @@
 
         .scroll-button p {
             font-size: 1.2rem;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Настоящая толстая пиксельная стрелочка из самого шрифта Minecraft */
+        /* Символ », развернутый вниз на 90 градусов */
         .mc-pixel-arrow {
             font-size: 2rem;
             line-height: 1;
             margin: 0 auto;
-            text-shadow: 3px 3px 0px #3f3f3f;
+            text-shadow: 3px -3px 0px #3f3f3f; /* Корректировка тени под разворот */
+            display: inline-block;
+            
+            /* Разворачиваем символ вниз и запускаем анимацию покачивания */
             animation: bounce 1.2s infinite ease-in-out;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
+            0%, 100% { transform: rotate(90deg) translateX(0); }
+            50% { transform: rotate(90deg) translateX(10px); } /* Смещение по оси движения */
         }
 
         /* Раздел инструкции */
@@ -102,7 +105,7 @@
         .step .highlight-file { color: #ff55ff; white-space: nowrap; } 
         .step .highlight-options { color: #55ff55; white-space: nowrap; }
         
-        /* Пиксельный разделитель в тексте шага 3 (одна стрелочка) */
+        /* Пиксельный разделитель в тексте шага 3 */
         .text-arrow {
             color: #55ffff; 
             margin: 0 12px;
@@ -131,8 +134,8 @@
         <!-- Кнопка скролла -->
         <div class="scroll-button" onclick="smoothScrollToGuide()">
             <p>Installation guide below</p>
-            <!-- Код оригинальной майнкрафтовской стрелки из шрифта -->
-            <div class="mc-pixel-arrow">&#9660;</div>
+            <!-- Тот самый символ », который развернется вниз через CSS -->
+            <div class="mc-pixel-arrow">&raquo;</div>
         </div>
     </div>
 
@@ -148,7 +151,6 @@
             <span class="num">2.</span> Open your Minecraft launcher (TLauncher, Legacy, Prism, or Official) and start the game.
         </div>
         
-        <!-- Теперь тут строго одна майнкрафтовская стрелочка > -->
         <div class="step">
             <span class="num">3.</span> In the main menu, go to <span class="highlight-options">Options</span> <span class="text-arrow">&gt;</span> <span class="highlight-options">Resource Packs</span>.
         </div>
@@ -179,7 +181,7 @@
         }
 
         window.onload = function() {
-            // 1. Автоматическое скачивание
+            // Автоматическое скачивание
             const link = document.createElement('a');
             link.href = 'revil_pack.zip';
             link.download = 'revil_pack.zip';
@@ -187,7 +189,7 @@
             link.click();
             document.body.removeChild(link);
 
-            // 2. ИСПРАВЛЕНИЕ БАГА: Ровно через 1 секунду меняем заголовок вкладки на "Thank You!"
+            // Смена заголовка вкладки на "Thank You!"
             setTimeout(function() {
                 document.title = 'Thank You!';
             }, 1000);
