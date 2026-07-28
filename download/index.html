@@ -16,59 +16,116 @@
         body {
             font-family: 'MinecraftCustom', monospace, sans-serif;
             color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            overflow: hidden;
-
-            /* Сохраняем пиксельный стиль для шрифта и фона */
+            padding: 0;
+            /* Возвращаем глубокий темный фон */
+            background-color: #121214; 
             image-rendering: -moz-crisp-edges !important;
             image-rendering: -webkit-crisp-edges !important;
             image-rendering: pixelated !important;
             image-rendering: crisp-edges !important;
+        }
 
-            /* Сделали наложение черного цвета намного светлее (всего 35% вместо 65%) */
-            background: 
-                linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
-                url('dirt_bg.png');
-            
-            background-repeat: no-repeat !important;
-            background-size: cover !important;
-            background-position: center !important;
+        /* Первый экран с благодарностью */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 20px;
         }
 
         .message-container {
-            text-align: center;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease, transform 0.8s ease;
-            padding: 20px;
         }
 
         h1 {
             font-size: 2.2rem;
             font-weight: normal;
-            margin: 0;
-            line-height: 1.5;
+            margin: 0 0 15px 0;
             text-shadow: 4px 4px 0px #3f3f3f; 
             font-smooth: never;
             -webkit-font-smoothing: none;
+        }
+
+        /* Стиль для подзаголовка (меньше и менее заметен) */
+        .subtitle {
+            font-size: 1.1rem;
+            color: #aaaaaa; /* Серый цвет, чтобы не бросался в глаза */
+            margin: 0 0 30px 0;
+            text-shadow: 2px 2px 0px #222222;
+        }
+
+        /* Анимированные стрелочки вниз */
+        .arrows {
+            font-size: 1.5rem;
+            color: #55ff55; /* Лаймовый майнкрафтовский цвет */
+            text-shadow: 2px 2px 0px #113311;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
         }
 
         .message-container.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Блок с самой инструкцией (появляется при прокрутке ниже) */
+        .instruction-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .instruction-section h2 {
+            font-size: 1.6rem;
+            color: #ffff55; /* Желтый цвет для заголовка шагов */
+            text-shadow: 3px 3px 0px #333300;
+            margin-bottom: 25px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #222222;
+        }
+
+        .step span {
+            color: #ff5555; /* Красный цвет для номеров шагов */
+        }
     </style>
 </head>
 <body>
 
-    <div class="box" id="content">
+    <!-- Первый главный экран -->
+    <div class="welcome-screen">
         <div class="message-container" id="text-block">
             <h1>Thank you for downloading my resource pack!</h1>
+            <!-- Новая маленькая надпись -->
+            <p class="subtitle">Scroll down for installation guide</p>
+            <!-- Пиксельные стрелочки -->
+            <div class="arrows">▼ ▼ ▼</div>
         </div>
+    </div>
+
+    <!-- Раздел с текстовой инструкцией ниже -->
+    <div class="instruction-section">
+        <h2>How to install the resource pack:</h2>
+        
+        <div class="step"><span>1.</span> Press <b>Win + R</b> on your keyboard, type <b>%appdata%\.minecraft</b> and click OK.</div>
+        <div class="step"><span>2.</span> Open the <b>resourcepacks</b> folder.</div>
+        <div class="step"><span>3.</span> Move the downloaded <b>revil_pack.zip</b> file into this folder.</div>
+        <div class="step"><span>4.</span> Launch Minecraft, go to Options -> Resource Packs, and select it!</div>
     </div>
 
     <script>
@@ -81,7 +138,7 @@
             link.click();
             document.body.removeChild(link);
             
-            // Через 1 секунду плавно показываем надпись
+            // Через 1 секунду плавно показываем весь приветственный блок
             setTimeout(function() {
                 document.getElementById('text-block').classList.add('visible');
                 document.title = 'Thank You!';
