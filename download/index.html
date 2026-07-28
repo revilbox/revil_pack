@@ -26,6 +26,7 @@
         }
 
         /* Слои фона: разделяем текстуру и затемнение для точного масштабирования */
+        /* Замените этот блок в коде вашего index.html */
         body::before {
             content: "";
             position: absolute;
@@ -35,14 +36,13 @@
             height: 100%;
             z-index: -2;
             
-            /* Подключаем текстуру */
-            background-image: url('dirt.png') !important;
+            /* Новое имя файла, чтобы заставить браузер сбросить кэш */
+            background-image: url('bg_dirt.png') !important;
             background-repeat: repeat !important;
             
-            /* Принудительно увеличиваем размер блоков (128 пикселей) */
-            background-size: 128px 128px !important; 
+            /* Сразу ставим размер побольше, чтобы пиксели были огромными */
+            background-size: 256px 256px !important; 
             
-            /* Жесткое отключение размытия пикселей */
             image-rendering: -moz-crisp-edges !important;
             image-rendering: -webkit-crisp-edges !important;
             image-rendering: pixelated !important;
