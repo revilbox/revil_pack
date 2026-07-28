@@ -13,33 +13,53 @@
             font-style: normal;
         }
 
- body {
-    font-family: 'MinecraftCustom', monospace, sans-serif;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
+        body {
+            font-family: 'MinecraftCustom', monospace, sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* Включаем жесткое пиксельное отображение для всего сайта */
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+        /* Слои фона: разделяем текстуру и затемнение для точного масштабирования */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            
+            /* Подключаем текстуру */
+            background-image: url('dirt.png') !important;
+            background-repeat: repeat !important;
+            
+            /* Принудительно увеличиваем размер блоков (128 пикселей) */
+            background-size: 128px 128px !important; 
+            
+            /* Жесткое отключение размытия пикселей */
+            image-rendering: -moz-crisp-edges !important;
+            image-rendering: -webkit-crisp-edges !important;
+            image-rendering: pixelated !important;
+            image-rendering: crisp-edges !important;
+        }
 
-    /* Затемнение фона и подключение картинки */
-    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
-                url('dirt.png');
-    
-    /* Заставляем её повторяться (это стандартное поведение для текстур) */
-    background-repeat: repeat;
-    
-    /* Увеличиваем размер каждого блока до 128px (вместо оригинальных 16px) */
-    background-size: 128px 128px; 
-}
-
+        /* Слой оригинального майнкрафтовского затемнения */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: rgba(0, 0, 0, 0.65) !important;
+        }
 
         .message-container {
             text-align: center;
@@ -47,6 +67,8 @@
             transform: translateY(20px);
             transition: opacity 0.8s ease, transform 0.8s ease;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
