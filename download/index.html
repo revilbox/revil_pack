@@ -13,30 +13,33 @@
             font-style: normal;
         }
 
-        body {
-            font-family: 'MinecraftCustom', monospace, sans-serif;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
+ body {
+    font-family: 'MinecraftCustom', monospace, sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
 
-            /* Отключаем размытие для ВСЕГО тела страницы (и для фона, и для шрифта) */
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
+    /* Включаем жесткое пиксельное отображение для всего сайта */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 
-            /* Подключаем вашу картинку текстуры с фирменным майнкрафтовским затемнением */
-            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
-                        url('dirt.png');
-            
-            /* Заставляем картинку повторяться во все стороны */
-            background-repeat: repeat;
-            
-            /* Увеличиваем размер блоков до 64 пикселей, чтобы они выглядели массивно */
-            background-size: 64px 64px; 
-        }
+    /* Затемнение фона и подключение картинки */
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                url('dirt.png');
+    
+    /* Заставляем её повторяться (это стандартное поведение для текстур) */
+    background-repeat: repeat;
+    
+    /* Увеличиваем размер каждого блока до 128px (вместо оригинальных 16px) */
+    background-size: 128px 128px; 
+}
+
 
         .message-container {
             text-align: center;
