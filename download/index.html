@@ -44,6 +44,12 @@
             line-height: 1.5;
         }
 
+        /* Класс, который скрипт добавит тексту, если пользователь зашел с телефона */
+        .mobile-error-text {
+            color: #ff5555 !important; /* Яркий майнкрафтовский красный цвет */
+            text-shadow: 3px 3px 0px #3f1111 !important; /* Темно-красная тень */
+        }
+
         /* Кнопка скролла */
         .scroll-button {
             cursor: pointer;
@@ -125,10 +131,10 @@
             color: #ffff55;
         }
 
-        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ: уменьшаем текст, чтобы он 100% влезал */
+        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ: автоматически подстраиваем размер */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.2rem !important; /* Уменьшили шрифт почти в два раза для мобилок */
+                font-size: 1.2rem !important;
                 line-height: 1.6 !important;
                 padding: 0 10px;
             }
@@ -192,10 +198,15 @@
             const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // ДЕЙСТВИЯ ДЛЯ ТЕЛЕФОНА (Текст теперь строго на английском):
-                document.getElementById('main-title').innerText = 'Please visit this website from your computer, thank you! (error_devicetype)';
+                // ДЕЙСТВИЯ ДЛЯ ТЕЛЕФОНА:
+                const titleNode = document.getElementById('main-title');
+                // Меняем текст ошибки
+                titleNode.innerText = 'Please visit this website from your computer, thank you! (error_devicetype)';
+                // Окрашиваем текст в красный цвет через добавление класса
+                titleNode.classList.add('mobile-error-text');
                 
-                document.getElementById('scroll-btn').style.style.display = 'none';
+                // Исправлено: корректно скрываем элементы
+                document.getElementById('scroll-btn').style.display = 'none';
                 document.getElementById('guide').style.display = 'none';
                 document.title = 'Device Error';
             } else {
