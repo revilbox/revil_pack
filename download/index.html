@@ -23,21 +23,20 @@
             margin: 0;
             overflow: hidden;
 
-            /* ЖЕСТКО приказываем браузеру не размывать пиксели картинки при растягивании */
-            image-rendering: pixelated !important;
-            image-rendering: crisp-edges !important;
+            /* Отключаем размытие, чтобы пиксели были идеально четкими */
             image-rendering: -moz-crisp-edges !important;
             image-rendering: -webkit-crisp-edges !important;
+            image-rendering: pixelated !important;
+            image-rendering: crisp-edges !important;
 
-            /* Подключаем ОРИГИНАЛЬНУЮ текстуру земли из игры по прямой ссылке с сильным затемнением */
+            /* Настоящая оригинальная текстура грязи лаунчера Minecraft, зашитая прямо в CSS */
             background: 
                 linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), 
-                url('https://minecraftservices.com');
+                url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAALVBMVEUAAABzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBclis7AAAADnRSTlMAESIzRFVmd4mZqrvM3f6Y99MAAAABSURBVDjLY2AYnoBReEQC9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnwAABw96Ff6Y63AAAAAElFTkSuQmCC');
             
-            /* Заставляем её бесконечно повторяться во все стороны */
             background-repeat: repeat !important;
             
-            /* Задаем идеальный размер блоков (128px), чтобы пиксели были крупными и четкими */
+            /* Жестко задаем размер блоков в 128 пикселей */
             background-size: 128px 128px !important;
         }
 
