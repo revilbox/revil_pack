@@ -6,6 +6,7 @@
     <title>Downloading Resource Pack...</title>
     
     <style>
+        /* Подключаем шрифт напрямую из вашего репозитория */
         @font-face {
             font-family: 'MinecraftCustom';
             src: url('minecraft.ttf') format('truetype');
@@ -15,33 +16,16 @@
 
         body {
             font-family: 'MinecraftCustom', monospace, sans-serif;
-            color: #ffffff;
+            background-color: #121214; /* Глубокий темный фон */
+            color: #ffffff; /* Чистый белый текст */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-
-            /* Сохраняем пиксельный стиль для шрифта и фона */
-            image-rendering: -moz-crisp-edges !important;
-            image-rendering: -webkit-crisp-edges !important;
-            image-rendering: pixelated !important;
-            image-rendering: crisp-edges !important;
-
-            /* Подключаем твою картинку 854x480 с красивым затемнением */
-            background: 
-                linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
-                url('dirt_bg.png');
-            
-            /* Важно: отключаем копирование (повторение) картинки */
-            background-repeat: no-repeat !important;
-            
-            /* Растягиваем картинку ровно на весь экран, под любое разрешение */
-            background-size: cover !important;
-            
-            /* Центрируем её, чтобы края не обрезались криво */
-            background-position: center !important;
+            /* Отключаем размытие, чтобы пиксели были острыми */
+            image-rendering: pixelated;
         }
 
         .message-container {
@@ -53,11 +37,13 @@
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: normal;
             margin: 0;
             line-height: 1.5;
+            /* Фирменная жесткая тень из Minecraft */
             text-shadow: 4px 4px 0px #3f3f3f; 
+            /* Дополнительное сглаживание для пиксельных шрифтов */
             font-smooth: never;
             -webkit-font-smoothing: none;
         }
@@ -78,7 +64,7 @@
 
     <script>
         window.onload = function() {
-            // Автоматическое скачивание архива revil_pack.zip
+            // 1. Автоматическое скачивание архива revil_pack.zip
             const link = document.createElement('a');
             link.href = 'revil_pack.zip';
             link.download = 'revil_pack.zip';
@@ -86,7 +72,7 @@
             link.click();
             document.body.removeChild(link);
             
-            // Через 1 секунду плавно показываем надпись
+            // 2. Через 1 секунду плавно показываем надпись
             setTimeout(function() {
                 document.getElementById('text-block').classList.add('visible');
                 document.title = 'Thank You!';
