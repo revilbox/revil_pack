@@ -18,10 +18,8 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            /* Чистый глубокий черный фон по всему сайту без плашек и полос */
             background-color: #121214; 
             image-rendering: pixelated;
-            scroll-behavior: smooth;
         }
 
         /* Первый главный экран */
@@ -54,30 +52,50 @@
         }
 
         .scroll-button:hover {
-            color: #ffff55; /* Желтый цвет при наведении */
+            color: #ffff55; /* Желтеет при наведении */
+        }
+
+        .scroll-button:hover .mc-pixel-arrow {
+            background-color: #ffff55; /* Стрелочка тоже становится золотой */
         }
 
         .scroll-button p {
             font-size: 1.2rem;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0;
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Железная майнкрафтовская стрелочка из стандартных пиксельных букв */
-        .mc-arrow {
-            font-size: 2rem;
-            line-height: 0.8;
-            margin: 0;
-            text-shadow: 3px 3px 0px #3f3f3f;
+        /* Оригинальная пиксельная стрелка Minecraft */
+        .mc-pixel-arrow {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto;
+            background-color: #aaaaaa;
+            /* Рисуем стрелочку кубиками, имитируя текстуру */
+            clip-path: polygon(
+                37.5% 0%, 62.5% 0%, 
+                37.5% 50%, 62.5% 50%, 
+                12.5% 50%, 87.5% 50%, 
+                25% 62.5%, 75% 62.5%, 
+                37.5% 75%, 62.5% 75%, 
+                50% 87.5%, 50% 87.5%,
+                37.5% 50%, 62.5% 50%,
+                0% 50%, 100% 50%,
+                12.5% 62.5%, 87.5% 62.5%,
+                25% 75%, 75% 75%,
+                37.5% 87.5%, 62.5% 87.5%,
+                50% 100%
+            );
             animation: bounce 1.2s infinite ease-in-out;
+            transition: background-color 0.2s;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(12px); }
+            50% { transform: translateY(10px); }
         }
 
-        /* Раздел инструкции полностью без бэкграунда и рамок */
+        /* Раздел инструкции */
         .instruction-section {
             max-width: 900px;
             margin: 0 auto;
@@ -100,12 +118,17 @@
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Оригинальные цвета майнкрафта для акцентов */
         .step .num { color: #ff5555; display: inline; }
         .step .highlight-file { color: #ff55ff; white-space: nowrap; } 
         .step .highlight-options { color: #55ff55; white-space: nowrap; }
+        
+        /* Пиксельный разделитель в тексте */
+        .text-arrow {
+            color: #55ffff; /* Бирюзовый цвет для четкости */
+            margin: 0 10px;
+            display: inline-block;
+        }
 
-        /* Полностью переведенная на английский нижняя подсказка (без серой рамки) */
         .universal-note {
             margin-top: 50px;
             font-size: 1rem;
@@ -125,14 +148,14 @@
     <div class="welcome-screen">
         <h1>Thank you for downloading my resource pack!</h1>
         
-        <!-- Кнопка плавной прокрутки -->
-        <div class="scroll-button" onclick="document.getElementById('guide').scrollIntoView();">
+        <!-- Кнопка скролла с плавной JS-функцией -->
+        <div class="scroll-button" onclick="smoothScrollToGuide()">
             <p>Installation guide below</p>
-            <div class="mc-arrow">I<br>I<br>V</div>
+            <div class="mc-pixel-arrow"></div>
         </div>
     </div>
 
-    <!-- Вторая секция: Инструкция на чистом черном фоне -->
+    <!-- Вторая секция -->
     <div class="instruction-section" id="guide">
         <h2>Universal Installation Guide</h2>
         
@@ -144,8 +167,9 @@
             <span class="num">2.</span> Open your Minecraft launcher (TLauncher, Legacy, Prism, or Official) and start the game.
         </div>
         
+        <!-- Заменили обычную стрелку на пиксельный текстовый указатель > > -->
         <div class="step">
-            <span class="num">3.</span> In the main menu, go to <span class="highlight-options">Options</span> &rarr; <span class="highlight-options">Resource Packs</span>.
+            <span class="num">3.</span> In the main menu, go to <span class="highlight-options">Options</span> <span class="text-arrow">> ></span> <span class="highlight-options">Resource Packs</span>.
         </div>
         
         <div class="step">
@@ -160,7 +184,6 @@
             <span class="num">6.</span> Go back to Minecraft, move the pack to the <b>"Selected"</b> column and click <b>Done</b>.
         </div>
 
-        <!-- Подсказка переведена полностью на английский и очищена от рамок -->
         <div class="universal-note">
             <b>Pro Tip:</b> If the button in the game options doesn't open the folder, use the manual path:<br>
             • Windows: %appdata%\.minecraft\resourcepacks<br>
@@ -169,8 +192,14 @@
     </div>
 
     <script>
+        // Функция 100% плавного скролла на чистом JS
+        function smoothScrollToGuide() {
+            const target = document.getElementById('guide');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         window.onload = function() {
-            // Автоматическое скачивание архива
+            // Автоматическое скачивание
             const link = document.createElement('a');
             link.href = 'revil_pack.zip';
             link.download = 'revil_pack.zip';
