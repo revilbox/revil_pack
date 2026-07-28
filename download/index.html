@@ -1,4 +1,34 @@
-html lang="en"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloading Resource Pack...</title>
+    
+    <!-- Подключение аватарки сайта (Favicon) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        @font-face {
+            font-family: 'MinecraftCustom';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'MinecraftCustom', monospace, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-color: #121214; 
+            image-rendering: pixelated;
+        }
+
+        /* Первый главный экран */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
