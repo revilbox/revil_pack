@@ -23,21 +23,25 @@
             margin: 0;
             overflow: hidden;
 
-            /* Отключаем размытие, чтобы пиксели были идеально четкими */
+            /* Сохраняем пиксельный стиль для шрифта и фона */
             image-rendering: -moz-crisp-edges !important;
             image-rendering: -webkit-crisp-edges !important;
             image-rendering: pixelated !important;
             image-rendering: crisp-edges !important;
 
-            /* Настоящая оригинальная текстура грязи лаунчера Minecraft, зашитая прямо в CSS */
+            /* Подключаем твою картинку 854x480 с красивым затемнением */
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), 
-                url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAALVBMVEUAAABzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBzVTBclis7AAAADnRSTlMAESIzRFVmd4mZqrvM3f6Y99MAAAABSURBVDjLY2AYnoBReEQC9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnYwAAYO9vYwAAYG8IDb2xsIsLPDADc7wIAHAwN4wAnIDfDAtbUVD7ixYQDmxmY84OzMAgZcnZgYwAMODpAAmIsLCHBiYgADdnwAABw96Ff6Y63AAAAAElFTkSuQmCC');
+                linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                url('dirt_bg.png');
             
-            background-repeat: repeat !important;
+            /* Важно: отключаем копирование (повторение) картинки */
+            background-repeat: no-repeat !important;
             
-            /* Жестко задаем размер блоков в 128 пикселей */
-            background-size: 128px 128px !important;
+            /* Растягиваем картинку ровно на весь экран, под любое разрешение */
+            background-size: cover !important;
+            
+            /* Центрируем её, чтобы края не обрезались криво */
+            background-position: center !important;
         }
 
         .message-container {
