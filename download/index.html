@@ -29,18 +29,13 @@
             image-rendering: pixelated !important;
             image-rendering: crisp-edges !important;
 
-            /* Подключаем твою картинку 854x480 с красивым затемнением */
+            /* Сделали наложение черного цвета намного светлее (всего 35% вместо 65%) */
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
                 url('dirt_bg.png');
             
-            /* Важно: отключаем копирование (повторение) картинки */
             background-repeat: no-repeat !important;
-            
-            /* Растягиваем картинку ровно на весь экран, под любое разрешение */
             background-size: cover !important;
-            
-            /* Центрируем её, чтобы края не обрезались криво */
             background-position: center !important;
         }
 
