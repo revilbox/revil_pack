@@ -42,11 +42,12 @@
             text-shadow: 4px 4px 0px #3f3f3f; 
             margin: 0 0 50px 0;
             line-height: 1.5;
+            color: #ffffff !important; /* Сам текст всегда белый */
         }
 
-        /* Класс, который скрипт добавит тексту, если пользователь зашел с телефона */
-        .mobile-error-text {
-            color: #ff5555 !important; /* Яркий майнкрафтовский красный цвет */
+        /* Стиль ТОЛЬКО для технической ошибки в скобках */
+        .error-code-red {
+            color: #ff5555 !important; /* Яркий майнкрафтовский красный */
             text-shadow: 3px 3px 0px #3f1111 !important; /* Темно-красная тень */
         }
 
@@ -131,7 +132,7 @@
             color: #ffff55;
         }
 
-        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ: автоматически подстраиваем размер */
+        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.2rem !important;
@@ -199,13 +200,9 @@
 
             if (isMobile) {
                 // ДЕЙСТВИЯ ДЛЯ ТЕЛЕФОНА:
-                const titleNode = document.getElementById('main-title');
-                // Меняем текст ошибки
-                titleNode.innerText = 'Please visit this website from your computer, thank you! (error_devicetype)';
-                // Окрашиваем текст в красный цвет через добавление класса
-                titleNode.classList.add('mobile-error-text');
+                // Теперь весь текст белый, а класс error-code-red красит только скобки
+                document.getElementById('main-title').innerHTML = 'Please visit this website from your computer, thank you! <span class="error-code-red">(error_devicetype)</span>';
                 
-                // Исправлено: корректно скрываем элементы
                 document.getElementById('scroll-btn').style.display = 'none';
                 document.getElementById('guide').style.display = 'none';
                 document.title = 'Device Error';
