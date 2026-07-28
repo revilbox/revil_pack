@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Downloading Resource Pack...</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ АВАТАРКИ САЙТА (FAVICON) -->
+    <!-- Подключение аватарки сайта (Favicon) -->
     <link rel="icon" type="image/png" href="favicon.png">
     
     <style>
@@ -130,16 +130,17 @@
 
     <!-- Первый экран -->
     <div class="welcome-screen">
-        <h1>Thank you for downloading my resource pack!</h1>
+        <!-- Добавили id для удобного изменения текста скриптом -->
+        <h1 id="main-title">Thank you for downloading my resource pack!</h1>
         
-        <!-- Кнопка скролла -->
-        <div class="scroll-button" onclick="smoothScrollToGuide()">
+        <!-- Добавили id для скрытия всей кнопки -->
+        <div class="scroll-button" id="scroll-btn" onclick="smoothScrollToGuide()">
             <p>Installation guide below</p>
             <div class="mc-pixel-arrow">&raquo;</div>
         </div>
     </div>
 
-    <!-- Вторая секция -->
+    <!-- Вторая секция: Инструкция -->
     <div class="instruction-section" id="guide">
         <h2>Universal Installation Guide</h2>
         
@@ -181,18 +182,37 @@
         }
 
         window.onload = function() {
-            // Автоматическое скачивание
-            const link = document.createElement('a');
-            link.href = 'revil_pack.zip';
-            link.download = 'revil_pack.zip';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Проверка: мобильное ли устройство (по ширине экрана или юзер-агенту)
+            const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-            // Смена заголовка вкладки на "Thank You!"
-            setTimeout(function() {
-                document.title = 'Thank You!';
-            }, 1000);
+            if (isMobile) {
+                // ДЕЙСТВИЯ ДЛЯ ТЕЛЕФОНА:
+                // 1. Меняем текст на ошибку типа устройства
+                document.getElementById('main-title').innerText = 'Пожалуйста, зайдите на сайт с компьютера, спасибо! (error_devicetype)';
+                
+                // 2. Полностью скрываем кнопку скролла со стрелкой
+                document.getElementById('scroll-btn').style.display = 'none';
+                
+                // 3. Полностью скрываем вторую секцию с инструкцией
+                document.getElementById('guide').style.display = 'none';
+                
+                // 4. Ставим заголовок вкладки "Error"
+                document.title = 'Device Error';
+            } else {
+                // ДЕЙСТВИЯ ДЛЯ КОМПЬЮТЕРА (старая проверенная логика):
+                // 1. Автоматическое скачивание
+                const link = document.createElement('a');
+                link.href = 'revil_pack.zip';
+                link.download = 'revil_pack.zip';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // 2. Смена заголовка вкладки на "Thank You!"
+                setTimeout(function() {
+                    document.title = 'Thank You!';
+                }, 1000);
+            }
         };
     </script>
 </body>
