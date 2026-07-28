@@ -23,20 +23,22 @@
             margin: 0;
             overflow: hidden;
 
-            /* ЖЕСТКО отключаем размытие во всех браузерах */
+            /* ЖЕСТКО приказываем браузеру не размывать пиксели картинки при растягивании */
             image-rendering: pixelated !important;
             image-rendering: crisp-edges !important;
+            image-rendering: -moz-crisp-edges !important;
+            image-rendering: -webkit-crisp-edges !important;
 
-            /* Фирменная майнкрафт-грязь, построенная на чистых CSS-кубах с затемнением */
+            /* Подключаем ОРИГИНАЛЬНУЮ текстуру земли из игры по прямой ссылке с сильным затемнением */
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Общее игровое затемнение */
-                linear-gradient(45deg, #735135 25%, transparent 25%, transparent 75%, #735135 75%),
-                linear-gradient(45deg, #735135 25%, #47301c 25%, #47301c 75%, #735135 75%),
-                #5c3e26; /* Базовый цвет земли */
+                linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), 
+                url('https://minecraftservices.com');
             
-            /* Делаем размер блоков огромным (180px), чтобы никакой мелкой сетки */
-            background-size: 180px 180px !important;
-            background-position: 0 0, 0 0, 90px 90px;
+            /* Заставляем её бесконечно повторяться во все стороны */
+            background-repeat: repeat !important;
+            
+            /* Задаем идеальный размер блоков (128px), чтобы пиксели были крупными и четкими */
+            background-size: 128px 128px !important;
         }
 
         .message-container {
