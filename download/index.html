@@ -15,10 +15,6 @@
 
         body {
             font-family: 'MinecraftCustom', monospace, sans-serif;
-            /* Фирменный фон Minecraft (грязевой блок) с затемнением */
-            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 16 16"><rect width="16" height="16" fill="%23735135"/><rect x="1" y="1" width="14" height="14" fill="%235c3e26"/><rect x="2" y="2" width="12" height="1" fill="%2347301c"/><rect x="2" y="3" width="1" height="11" fill="%2347301c"/><rect x="5" y="5" width="3" height="3" fill="%23382414"/><rect x="10" y="9" width="4" height="2" fill="%23382414"/></svg>');
-            background-size: 64px 64px; /* Делаем пиксели крупными */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -27,7 +23,15 @@
             margin: 0;
             overflow: hidden;
             image-rendering: pixelated;
-            cursor: pointer; /* Показывает, что на экран можно кликнуть */
+
+            /* Фирменный темный фон Minecraft (Dirt Block), созданный на чистом CSS */
+            background-color: #5c3e26;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), /* Общее затемнение фона */
+                linear-gradient(45deg, #735135 25%, transparent 25%, transparent 75%, #735135 75%, #735135),
+                linear-gradient(45deg, #735135 25%, #47301c 25%, #47301c 75%, #735135 75%, #735135);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 0, 20px 20px;
         }
 
         .message-container {
@@ -43,19 +47,10 @@
             font-weight: normal;
             margin: 0;
             line-height: 1.5;
+            /* Фирменная жесткая тень из Minecraft */
             text-shadow: 4px 4px 0px #3f3f3f; 
             font-smooth: never;
             -webkit-font-smoothing: none;
-            
-            /* Запускаем покачивание текста */
-            animation: minecraftSplash 1.2s infinite ease-in-out;
-        }
-
-        /* Анимация покачивания как у сплешей в главном меню */
-        @keyframes minecraftSplash {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05) rotate(-1deg); }
-            100% { transform: scale(1); }
         }
 
         .message-container.visible {
@@ -73,33 +68,6 @@
     </div>
 
     <script>
-        // Функция создания оригинального звука клика кнопки Minecraft
-        function playClickSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-
-                oscillator.type = 'triangle'; // Треугольная волна дает более ретро-звук
-                oscillator.frequency.setValueAtTime(120, audioCtx.currentTime); // Базовая частота «щелчка»
-                oscillator.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.05);
-
-                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.05);
-            } catch (e) {
-                console.log("Audio not allowed yet");
-            }
-        }
-
-        // Воспроизводим звук при любом клике по экрану
-        document.body.addEventListener('click', playClickSound);
-
         window.onload = function() {
             // 1. Автоматическое скачивание архива revil_pack.zip
             const link = document.createElement('a');
