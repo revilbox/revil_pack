@@ -22,43 +22,21 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            position: relative;
-        }
 
-        /* Непробиваемый пиксельный фон, зашитый в Base64 текст */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            
-            /* Настоящая пиксельная текстура земли без единого опасного символа */
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQIW2NkYGD4D8TAAJMECcAEYAIwApgATCAlAOMDAAsUAn08v7g1AAAAAElFTkSuQmCC') !important;
-            background-repeat: repeat !important;
-            
-            /* ЖЕСТКО делаем пиксели огромными. Если мало — поменяй на 256px */
-            background-size: 128px 128px !important; 
-            
-            /* Отключаем размытие во всех браузерах */
-            image-rendering: -moz-crisp-edges !important;
-            image-rendering: -webkit-crisp-edges !important;
+            /* ЖЕСТКО отключаем размытие во всех браузерах */
             image-rendering: pixelated !important;
             image-rendering: crisp-edges !important;
-        }
 
-        /* Затемнение поверх блоков */
-        body::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: rgba(0, 0, 0, 0.65) !important;
+            /* Фирменная майнкрафт-грязь, построенная на чистых CSS-кубах с затемнением */
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Общее игровое затемнение */
+                linear-gradient(45deg, #735135 25%, transparent 25%, transparent 75%, #735135 75%),
+                linear-gradient(45deg, #735135 25%, #47301c 25%, #47301c 75%, #735135 75%),
+                #5c3e26; /* Базовый цвет земли */
+            
+            /* Делаем размер блоков огромным (180px), чтобы никакой мелкой сетки */
+            background-size: 180px 180px !important;
+            background-position: 0 0, 0 0, 90px 90px;
         }
 
         .message-container {
@@ -67,8 +45,6 @@
             transform: translateY(20px);
             transition: opacity 0.8s ease, transform 0.8s ease;
             padding: 20px;
-            position: relative;
-            z-index: 1;
         }
 
         h1 {
