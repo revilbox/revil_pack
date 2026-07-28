@@ -18,6 +18,7 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
+            /* Чистый глубокий черный фон по всему сайту без плашек и полос */
             background-color: #121214; 
             image-rendering: pixelated;
             scroll-behavior: smooth;
@@ -42,7 +43,7 @@
             line-height: 1.4;
         }
 
-        /* Кнопка скролла: текст и стрелочка объединены в один блок */
+        /* Кнопка скролла */
         .scroll-button {
             cursor: pointer;
             display: inline-block;
@@ -53,7 +54,7 @@
         }
 
         .scroll-button:hover {
-            color: #ffff55; /* При наведении становится желтой, как в меню игры */
+            color: #ffff55; /* Желтый цвет при наведении */
         }
 
         .scroll-button p {
@@ -62,12 +63,12 @@
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Настоящая пиксельная майнкрафтовская стрелочка из символов */
+        /* Железная майнкрафтовская стрелочка из стандартных пиксельных букв */
         .mc-arrow {
-            font-size: 2.5rem;
-            line-height: 1;
+            font-size: 2rem;
+            line-height: 0.8;
             margin: 0;
-            text-shadow: 3px 3px 0px #222222;
+            text-shadow: 3px 3px 0px #3f3f3f;
             animation: bounce 1.2s infinite ease-in-out;
         }
 
@@ -76,13 +77,11 @@
             50% { transform: translateY(12px); }
         }
 
-        /* Блок универсальной инструкции */
+        /* Раздел инструкции полностью без бэкграунда и рамок */
         .instruction-section {
             max-width: 900px;
             margin: 0 auto;
-            padding: 80px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-top: 4px solid #3f3f3f;
+            padding: 60px 20px 100px 20px;
             box-sizing: border-box;
         }
 
@@ -91,10 +90,9 @@
             color: #ffff55;
             text-shadow: 3px 3px 0px #333300;
             text-align: center;
-            margin: 0 0 50px 0;
+            margin: 0 0 60px 0;
         }
 
-        /* Исправленная структура шагов: текст больше не съезжает */
         .step {
             margin-bottom: 35px;
             font-size: 1.2rem;
@@ -102,21 +100,22 @@
             text-shadow: 2px 2px 0px #222222;
         }
 
-        /* Цветовые акценты как в игре */
+        /* Оригинальные цвета майнкрафта для акцентов */
         .step .num { color: #ff5555; display: inline; }
-        .step .highlight-file { color: #ff55ff; white-space: nowrap; } /* Пак не переносится по частям */
+        .step .highlight-file { color: #ff55ff; white-space: nowrap; } 
         .step .highlight-options { color: #55ff55; white-space: nowrap; }
 
-        /* Нижняя плашка подсказки */
+        /* Полностью переведенная на английский нижняя подсказка (без серой рамки) */
         .universal-note {
-            background: #2e2e31;
-            padding: 20px;
-            border: 4px solid #3f3f3f;
-            margin-top: 40px;
-            font-size: 0.95rem;
+            margin-top: 50px;
+            font-size: 1rem;
             line-height: 1.8;
-            color: #dddddd;
-            text-shadow: 1px 1px 0px #000;
+            color: #aaaaaa;
+            text-shadow: 2px 2px 0px #222222;
+        }
+        
+        .universal-note b {
+            color: #ffff55;
         }
     </style>
 </head>
@@ -126,14 +125,14 @@
     <div class="welcome-screen">
         <h1>Thank you for downloading my resource pack!</h1>
         
-        <!-- Кнопка: Текст и стрелочка теперь одно целое -->
+        <!-- Кнопка плавной прокрутки -->
         <div class="scroll-button" onclick="document.getElementById('guide').scrollIntoView();">
             <p>Installation guide below</p>
-            <div class="mc-arrow">║<br>▼</div>
+            <div class="mc-arrow">I<br>I<br>V</div>
         </div>
     </div>
 
-    <!-- Второй экран: Инструкция -->
+    <!-- Вторая секция: Инструкция на чистом черном фоне -->
     <div class="instruction-section" id="guide">
         <h2>Universal Installation Guide</h2>
         
@@ -161,8 +160,9 @@
             <span class="num">6.</span> Go back to Minecraft, move the pack to the <b>"Selected"</b> column and click <b>Done</b>.
         </div>
 
+        <!-- Подсказка переведена полностью на английский и очищена от рамок -->
         <div class="universal-note">
-            <b>Pro Tip:</b> Если кнопка в настройках игры не открывает папку, используйте ручной путь:<br>
+            <b>Pro Tip:</b> If the button in the game options doesn't open the folder, use the manual path:<br>
             • Windows: %appdata%\.minecraft\resourcepacks<br>
             • macOS: ~/Library/Application Support/minecraft/resourcepacks
         </div>
