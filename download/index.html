@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Downloading Resource Pack...</title>
     
+    <!-- ПОДКЛЮЧЕНИЕ АВАТАРКИ САЙТА (FAVICON) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     <style>
         @font-face {
             font-family: 'MinecraftCustom';
@@ -52,7 +55,7 @@
         }
 
         .scroll-button:hover {
-            color: #ffff55; /* Желтеет при наведении */
+            color: #ffff55;
         }
 
         .scroll-button p {
@@ -66,16 +69,14 @@
             font-size: 2rem;
             line-height: 1;
             margin: 0 auto;
-            text-shadow: 3px -3px 0px #3f3f3f; /* Корректировка тени под разворот */
+            text-shadow: 3px -3px 0px #3f3f3f; 
             display: inline-block;
-            
-            /* Разворачиваем символ вниз и запускаем анимацию покачивания */
             animation: bounce 1.2s infinite ease-in-out;
         }
 
         @keyframes bounce {
             0%, 100% { transform: rotate(90deg) translateX(0); }
-            50% { transform: rotate(90deg) translateX(10px); } /* Смещение по оси движения */
+            50% { transform: rotate(90deg) translateX(10px); } 
         }
 
         /* Раздел инструкции */
@@ -134,7 +135,6 @@
         <!-- Кнопка скролла -->
         <div class="scroll-button" onclick="smoothScrollToGuide()">
             <p>Installation guide below</p>
-            <!-- Тот самый символ », который развернется вниз через CSS -->
             <div class="mc-pixel-arrow">&raquo;</div>
         </div>
     </div>
